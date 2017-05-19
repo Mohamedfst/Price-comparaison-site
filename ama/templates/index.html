@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ app_title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/skeleton/css/skeleton.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+</style>
+<body>
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-red w3-card-2 w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">About us</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Partnerships</a>
+   
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+  </div>
+</div>
+
+  </div>
+  <div id="wrapper" class="container">
+    <h1>{{ app_title }}</h1>
+    <main>
+      <div id="filter-container">
+        <form> 
+          <div class="row">
+            <div class="eight columns">
+              <label for="keyword">Find a deal</label>
+              <input type="text" name="keyword" id="keyword" class="u-full-width" value="{{ keyword }}" placeholder="Keyword">
+            </div>
+            <div class="two columns">
+              <label for="search_index">Category</label>
+              <select name="search_index" id="search_index" class="u-full-width">
+              {% for index in search_indices %}
+                {% set data = search_index ~ "," ~ index %}
+                <option value="{{ index }}" {{ data | selected }}>{{ index }}</option>
+              {% endfor %}
+              </select>
+            </div>
+            <div class="two columns">
+              <button class="button-primary" id="search-button">search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+{% if m %}
+<div id="results-container">
+
+        {% for md in m %}
+        
+        <div class="item">
+          <div class="item-image-container">
+            <img src="{{md[0]}}" alt="{{ md[1]}}" class="item-image">
+          </div>
+          <div class="item-details-container">
+            <a href="{{ md[2] }}" class="item-title">
+              <strong>{{ md[3] }}</strong>
+              
+            </a>
+                         <div class="item-price">${{md[4] }}</div>
+                        
+            
+                    </div>
+                    </div>
+                    {% endfor %}
+                      </div>
+
+
+
+
+{% elseif has_searched %}
+not yet
+
+{% endif %}
+
+
+
+
+      
+     </main>
+  </div>
+</body>
+</html>
